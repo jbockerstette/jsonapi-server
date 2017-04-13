@@ -9,6 +9,7 @@ var ldap_auth = require("./ldap_auth");
 process.title = "jsonapi-server";
 
 jsonApi.setConfig({
+  graphiql: false,
   swagger: {
     title: "Apple DP JSON:API Server",
     version: "0.1.1",
