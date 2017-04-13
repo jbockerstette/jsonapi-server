@@ -1,4 +1,5 @@
-const jsonApi = require('../..')
+"use strict";
+var jsonApi = require("../..");
 
-module.exports = new jsonApi.MemoryHandler()
-module.exports.delete = null
+module.exports = new jsonApi.MemoryHandler();
+module.exports.delete = null;
