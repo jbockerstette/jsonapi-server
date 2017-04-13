@@ -38,7 +38,45 @@ jsonApi.setConfig({
   }
 });
 
+/**
+ * Swagger sends the request.params.filter = '[isWritable]=true&[isHistorical]=true' which needs to
+ * be converted from the string to a JSON object like so
+ * {
+ *  isWritable:true,
+ *  isHistorical:true
+ *  }
+ * @param param If a string, then convert to json object but if not a string then do nothing.
+ * @return {*} The resulting json from the string or if it is not a string then just return the
+ * param with no changes.
+ */
+const toJSON = function (param) {
+  const results = {};
+  let key;
+  let value;
+  if (typeof param === 'string' ){
+    param.split('&').forEach((obj) => {
+      obj.split('=').forEach((item) => {
+        if (item.includes('[')){
+          key = item.replace(/\[|\]/g,'');
+        } else {
+          results[key] = item;
+        }
+      });
+    });
+    return results;
+  }
+  return param;
+};
+
 jsonApi.authenticate(function(request, callback) {
+
+  //Fix the params if they are sent as a string like what swagger does. If you don't do this to the
+  //stuff that swagger ui sends, then the restapi will crash and burn.
+  request.params.filter = toJSON(request.params.filter);
+  request.params.fields = toJSON(request.params.fields);
+  request.params.include = toJSON(request.params.include);
+  request.params.page = toJSON(request.params.page);
+  request.params.sort = toJSON(request.params.sort);
 
   //Allow the request for the swagger.json as it should not be protected resource.
    if (request.route.path.toLowerCase() === "swagger.json") return callback();

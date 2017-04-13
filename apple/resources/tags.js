@@ -48,15 +48,11 @@ jsonApi.define({
       .example(0),
     engMax: jsonApi.Joi.number().min(jsonApi.Joi.ref('engMin')).required()
       .description("The maximum eng units value that corresponds to the rawMax value."),
-    inputType: jsonApi.Joi.string().trim().lowercase()
-      .when('isWritable', {
-        is: true,
-        then: jsonApi.Joi.string().regex(REGEX_INPUT_TYPE),
-        otherwise: jsonApi.Joi.allow(null, '')
-      }).description("Only valid for writable tags. one_shot = write the value one time. force = " +
+    inputType: jsonApi.Joi.string().trim().lowercase().regex(REGEX_INPUT_TYPE).optional()
+      .description("Only valid for writable tags. one_shot = write the value one time. force = " +
         "always do a write if the tag.value is not equal to tag.input. momentary = write a 1 and" +
         "then write a 0.")
-      .example("0"),
+      .example("one_shot"),
     trackRuntime: jsonApi.Joi.boolean().default(false)
       .description("If true, then count the number of times this tag goes non-zero and track the " +
         "amount of time the tag stays non zero.")
@@ -67,6 +63,9 @@ jsonApi.define({
     value: jsonApi.Joi.any().optional()
       .description("The current value of the tag in engineering units.")
       .example("24.5"),
+    rawValue: jsonApi.Joi.number().integer().optional()
+      .description("The current value of the tag in engineering units.")
+      .example("24"),
     input: jsonApi.Joi.any().optional()
       .description("If tag is writeable, the value to write to the tag in engineering units.")
       .example("24.5"),
