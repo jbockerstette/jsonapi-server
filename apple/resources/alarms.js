@@ -35,6 +35,15 @@ jsonApi.define({
     setpoint: jsonApi.Joi.number().default(0)
       .description("The value that triggers the alarm.")
       .example("10"),
+    dataQuality: jsonApi.Joi.string().optional()
+      .description("The data quality from the tag.")
+      .example("Ok"),
+    value: jsonApi.Joi.any().optional()
+      .description("The current value from the tag in engineering units.")
+      .example("24.5"),
+    units: jsonApi.Joi.string().optional()
+      .description("The tag units.")
+      .example("Volts"),
     lastUpdate: jsonApi.Joi.date().optional() // also, for javascript timestamp (milliseconds)
       .description("The Unix time in milliseconds of when the alarm was updated.")
       .example("1463672736248"),
