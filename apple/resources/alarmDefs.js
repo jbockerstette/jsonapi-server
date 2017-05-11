@@ -17,6 +17,8 @@ jsonApi.define({
     _id: jsonApi.Joi.string(),
     tagId: jsonApi.Joi.string().required()
       .description("The tag this alarm def is for."),
+    device_id: jsonApi.Joi.string().required()
+      .description("The device this alarm def is for."),
     desc: jsonApi.Joi.string().trim()
       .description("The description of this alarm def.")
       .example("The water level is high"),

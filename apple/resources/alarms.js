@@ -17,6 +17,8 @@ jsonApi.define({
     _id: jsonApi.Joi.string(),
     tagId: jsonApi.Joi.string().required()
       .description("The tag id this alarm is for."),
+    device_id: jsonApi.Joi.string().required()
+      .description("The device id this alarm is for."),
     tagname: jsonApi.Joi.string().required()
       .description("The tag this alarm is for."),
     alarmDefId: jsonApi.Joi.string().required()
@@ -33,6 +35,9 @@ jsonApi.define({
     setpoint: jsonApi.Joi.number().default(0)
       .description("The value that triggers the alarm.")
       .example("10"),
+    lastUpdate: jsonApi.Joi.date().optional() // also, for javascript timestamp (milliseconds)
+      .description("The Unix time in milliseconds of when the alarm was updated.")
+      .example("1463672736248"),
     new_timestamp: jsonApi.Joi.date().optional() // also, for javascript timestamp (milliseconds)
       .description("The Unix time in milliseconds of when the alarm was created.")
       .example("1463672736248"),
