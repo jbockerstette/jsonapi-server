@@ -78,9 +78,17 @@ jsonApi.define({
     activeAlarm: jsonApi.Joi.string().optional()
       .description("Is the tag in an alarm state based on an alarmDefs definition for the tag.")
       .example("None, HH, HI, LO, LL, INVALID"),
+    alarmAcked: jsonApi.Joi.boolean().default(false)
+      .description("If true the alarm has been acked.")
+      .example("true"),
+    alarmReset: jsonApi.Joi.boolean().default(false)
+      .description("If true the alarm has been reset.")
+      .example("true"),
     alarmStatus: jsonApi.Joi.string().optional()
       .description("Is the activeAlarm clear, acked, unacked.")
       .example("Clear, acked, unacked"),
+    alarmDefId: jsonApi.Joi.string().optional()
+      .description("If in alarm, then this will point to the alarm def id."),
     device_id: jsonApi.Joi.allow(null, '').optional()
       .description("The device id that this tag is associated with.")
       .example("d7a8b614-701d-41f5-b1c6-6b06790b0767")

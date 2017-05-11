@@ -1,0 +1,56 @@
+var jsonApi = require("../../.");
+var MongoStore = require("../../../jsonapi-store-mongodb");
+//var rppHandler = require("../handlers/rppHandler.js");
+const REGEX_LEVEL = /(^Critical$)|(^Info$)|(^Warning$)$/gi;
+const REGEX_ALARM_TYPE = /(^HH$)|(^HI$)|(^LO$)|(^LL$)|(^INVALID$)$/gi;
+
+jsonApi.define({
+  namespace: "json:api",
+  resource: "alarms",
+  description: "All current alarms in the system.",
+  handlers: new MongoStore({
+    url: process.env.MONGO_URL
+  }),
+  searchParams: {},
+  attributes: {
+    id: jsonApi.Joi.string().default(jsonApi.Joi.ref('_id')),
+    _id: jsonApi.Joi.string(),
+    tagId: jsonApi.Joi.string().required()
+      .description("The tag id this alarm is for."),
+    tagname: jsonApi.Joi.string().required()
+      .description("The tag this alarm is for."),
+    alarmDefId: jsonApi.Joi.string().required()
+      .description("The alarm def id this alarm came from."),
+    desc: jsonApi.Joi.string().trim()
+      .description("The description from the alarm def.")
+      .example("The water level is high"),
+    level: jsonApi.Joi.string().insensitive().trim().regex(REGEX_LEVEL).default('Warning')
+      .description("The alarm level severity.")
+      .example("Critical"),
+    alarmType: jsonApi.Joi.string().trim().uppercase().regex(REGEX_ALARM_TYPE).required()
+      .description("The type of the alarm.")
+      .example("HH"),
+    setpoint: jsonApi.Joi.number().default(0)
+      .description("The value that triggers the alarm.")
+      .example("10"),
+    new_timestamp: jsonApi.Joi.date().optional() // also, for javascript timestamp (milliseconds)
+      .description("The Unix time in milliseconds of when the alarm was created.")
+      .example("1463672736248"),
+    cleared_timestamp: jsonApi.Joi.date().optional() // also, for javascript timestamp (milliseconds)
+      .description("The Unix time in milliseconds of when the alarm cleared.")
+      .example("1463672736248"),
+    acked_timestamp: jsonApi.Joi.date().optional() // also, for javascript timestamp (milliseconds)
+      .description("The Unix time in milliseconds of when the alarm was acked.")
+      .example("1463672736248"),
+    alarmStatus: jsonApi.Joi.string().trim()
+      .description("The current status of the alarm: new, acked, cleared.")
+      .example("Cleared-Acked"),
+    alarmAcked: jsonApi.Joi.boolean().default(false)
+      .description("If true the alarm has been acked.")
+      .example("true"),
+    alarmReset: jsonApi.Joi.boolean().default(false)
+      .description("If true the alarm has been reset.")
+      .example("true")
+  },
+  examples: [{}]
+});
