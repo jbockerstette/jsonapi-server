@@ -3,6 +3,7 @@ var MongoStore = require("../../../jsonapi-store-mongodb");
 //var rppHandler = require("../handlers/rppHandler.js");
 const REGEX_LEVEL = /(^Critical$)|(^Info$)|(^Warning$)$/gi;
 const REGEX_ALARM_TYPE = /(^HH$)|(^HI$)|(^LO$)|(^LL$)|(^INVALID$)$/gi;
+const REGEX_VALUE_TYPE = /(^bool$)|(^real$)|(^integer$)|(^string$)$/gi;
 
 jsonApi.define({
   namespace: "json:api",
@@ -41,6 +42,10 @@ jsonApi.define({
     value: jsonApi.Joi.any().optional()
       .description("The current value from the tag in engineering units.")
       .example("24.5"),
+    valueType: jsonApi.Joi.string().trim().regex(REGEX_VALUE_TYPE)
+      .default('real')
+      .description('Can only be bool, real, integer or string.')
+      .example('bool'),
     units: jsonApi.Joi.string().optional()
       .description("The tag units.")
       .example("Volts"),
