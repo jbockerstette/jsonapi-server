@@ -16,12 +16,14 @@ jsonApi.define({
   attributes: {
     id: jsonApi.Joi.string().default(jsonApi.Joi.ref('_id')),
     _id: jsonApi.Joi.string(),
+    tagname: jsonApi.Joi.string().required()
+      .description("The tag this alarm is for."),
+    deviceName: jsonApi.Joi.string().required()
+      .description("The tag this alarm is for."),
     tagId: jsonApi.Joi.string().required()
       .description("The tag id this alarm is for."),
     device_id: jsonApi.Joi.string().required()
       .description("The device id this alarm is for."),
-    tagname: jsonApi.Joi.string().required()
-      .description("The tag this alarm is for."),
     alarmDefId: jsonApi.Joi.string().required()
       .description("The alarm def id this alarm came from."),
     desc: jsonApi.Joi.string().trim()
@@ -39,6 +41,9 @@ jsonApi.define({
     dataQuality: jsonApi.Joi.string().optional()
       .description("The data quality from the tag.")
       .example("Ok"),
+    units: jsonApi.Joi.string().optional()
+      .description("The tag units.")
+      .example("Volts"),
     value: jsonApi.Joi.any().optional()
       .description("The current value from the tag in engineering units.")
       .example("24.5"),
@@ -46,9 +51,6 @@ jsonApi.define({
       .default('real')
       .description('Can only be bool, real, integer or string.')
       .example('bool'),
-    units: jsonApi.Joi.string().optional()
-      .description("The tag units.")
-      .example("Volts"),
     lastUpdate: jsonApi.Joi.date().optional() // also, for javascript timestamp (milliseconds)
       .description("The Unix time in milliseconds of when the alarm was updated.")
       .example("1463672736248"),

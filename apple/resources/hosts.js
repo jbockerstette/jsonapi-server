@@ -17,15 +17,15 @@ jsonApi.define({
     hostnameOrIP: jsonApi.Joi.string().trim().hostname().required()
       .description("The hostname or ip of the host which is running this scada software.")
       .example("my.cool.host.com"),
+    isPrimary: jsonApi.Joi.boolean().default(true)
+      .description("Is this the primary host.")
+      .example("true"),
     macAddress: jsonApi.Joi.string().trim().uppercase().regex(REGEX_MAC_ADDRESS).optional()
       .description("The host mac address.")
       .example("00:00:00:00:00:00"),
     desc: jsonApi.Joi.string().required()
       .description("The description <Country>.<Location>.<Building>.<Floor>.<Room>.<Row>.<DP>.<PrimaryOrSec>")
-      .example("US.MSC.01.01.0001.01.02.1"),
-    isPrimary: jsonApi.Joi.boolean().default(true)
-      .description("Is this the primary host.")
-      .example("true")
+      .example("US.MSC.01.01.0001.01.02.1")
   },
   examples: [{}]
 });

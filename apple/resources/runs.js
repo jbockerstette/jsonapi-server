@@ -15,6 +15,8 @@ jsonApi.define({
     _id: jsonApi.Joi.string(),
     objectId: jsonApi.Joi.string().required()
       .description("The tag or alarmDef this history is for."),
+    device_id: jsonApi.Joi.string().required()
+      .description("The device that the objectId belongs to."),
     timestamp: jsonApi.Joi.date().required() // also, for javascript timestamp (milliseconds)
       .description("The beginning hour.")
       .example("1463672736248"),

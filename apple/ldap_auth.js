@@ -4,8 +4,7 @@
  *
  * Created by jbockerstette on 11/8/16.
  */
-
-var rest = require("./rest.js");
+const rest = require("./rest.js");
 
 /**
  * Convenience function to create http options for our ldap auth service running at http://localhost:8888.
@@ -16,8 +15,7 @@ var rest = require("./rest.js");
  * Form 2: auth="Bearer jwt.web.token" where jwt.web.token is a valid webtoken which was originally returned by
  * successfully doing a GET -H "authorization:Basic amJvY2tlcnN0ZXR0ZTpjaGFyZ2VyLg==" http://localhost:8888
  */
-var getAuthOptions = function(auth)
-{
+const getAuthOptions = function (auth) {
   return {
     host: 'localhost',
     port: 8888,
@@ -40,11 +38,11 @@ var getAuthOptions = function(auth)
  * successfully doing a GET -H "authorization:Basic amJvY2tlcnN0ZXR0ZTpjaGFyZ2VyLg==" http://localhost:8888
  * @returns {*} the user name passed in the base64 encoded auth parameter.
  */
-var getUser = function (auth) {
-  var parts = auth.split(" ");
-  if (parts[1]){
-    var userColonPw = Buffer.from(parts[1], 'base64').toString("ascii");
-    var userAndPw = userColonPw.split(":");
+const getUser = function (auth) {
+  const parts = auth.split(" ");
+  if (parts[1]) {
+    const userColonPw = Buffer.from(parts[1], 'base64').toString("ascii");
+    const userAndPw = userColonPw.split(":");
     if (userAndPw[1])
       return userAndPw[0];
   }
@@ -65,7 +63,7 @@ exports.authorize = function(auth, onResults)
 {
   console.log("authorize: " + auth);
 
-  var options = getAuthOptions(auth);
+  const options = getAuthOptions(auth);
 
   rest.getJSON(options, onResults);
 };

@@ -15,6 +15,12 @@ jsonApi.define({
   attributes: {
     id: jsonApi.Joi.string().default(jsonApi.Joi.ref('_id')),
     _id: jsonApi.Joi.string(),
+    tagname: jsonApi.Joi.string().trim()
+      .description("The unique tag name.")
+      .example("MY_AWESOME_TAGNAME"),
+    deviceName: jsonApi.Joi.string().trim()
+      .description("The unique device name.")
+      .example("MY_AWESOME_DEVICE"),
     tagId: jsonApi.Joi.string().required()
       .description("The tag this history is for."),
     device_id: jsonApi.Joi.string().required()
@@ -31,21 +37,21 @@ jsonApi.define({
     setpoint: jsonApi.Joi.number().default(0)
       .description("The value that triggers the alarm.")
       .example("10"),
-    dataQuality: jsonApi.Joi.string().optional()
-      .description("The data quality from the tag.")
-      .example("Ok"),
-    value: jsonApi.Joi.any().optional()
-      .description("The current value from the tag in engineering units.")
-      .example("24.5"),
-    units: jsonApi.Joi.string().optional()
-      .description("The tag units.")
-      .example("Volts"),
     timestamp: jsonApi.Joi.date().required() // also, for javascript timestamp (milliseconds)
       .description("The Unix time in milliseconds of the tag.")
       .example("1463672736248"),
     alarmStatus: jsonApi.Joi.string().optional()
       .description("Is the activeAlarm clear, acked, unacked.")
-      .example("Clear, acked, unacked")
+      .example("Clear, acked, unacked"),
+    dataQuality: jsonApi.Joi.string().optional()
+      .description("The data quality from the tag.")
+      .example("Ok"),
+    units: jsonApi.Joi.string().optional()
+      .description("The tag units.")
+      .example("Volts"),
+    value: jsonApi.Joi.any().optional()
+      .description("The current value from the tag in engineering units.")
+      .example("24.5")
   },
   examples: [{}]
 });

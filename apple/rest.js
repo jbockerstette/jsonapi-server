@@ -2,8 +2,8 @@
  * REST request class
  * Created by jbockerstette on 11/8/16.
  */
-var http = require("http");
-var https = require("https");
+const http = require("http");
+const https = require("https");
 
 /**
  * getJSON:  REST get request returning JSON object(s)
@@ -15,10 +15,9 @@ exports.getJSON = function(options, onResult)
   console.log("rest::getJSON");
 
   // var prot = options.port == 443 ? https : http;
-  var prot = http;
-  var req = prot.request(options, function(res)
-  {
-    var output = '';
+  // const req = prot.request(options, function (res) {
+  const req = http.request(options, function (res) {
+    let output = '';
     console.log(options.host + ':' + res.statusCode);
     res.setEncoding('utf8');
 
@@ -26,7 +25,7 @@ exports.getJSON = function(options, onResult)
       output += chunk;
     });
 
-    res.on('end', function() {
+    res.on('end', function () {
       onResult(res.statusCode, output);
     });
   });
