@@ -17,6 +17,12 @@ jsonApi.define({
     timestamp: jsonApi.Joi.date().required() // also, for javascript timestamp (milliseconds)
       .description("The Unix time in milliseconds of the log.")
       .example("1463672736248"),
+    processName: jsonApi.Joi.string().trim()
+      .description("The log origination process name.")
+      .example("rpp-modbus-driver"),
+    filename: jsonApi.Joi.string().trim()
+      .description("The log origination file name.")
+      .example("dbimporter.js"),
     logLevel: jsonApi.Joi.string().insensitive().trim().regex(REGEX_LOG_LEVEL).default('Info')
       .description("The log level severity which can be Warning, Info, Error, Fatal.")
       .example("Error"),
