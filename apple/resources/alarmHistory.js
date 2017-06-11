@@ -15,6 +15,9 @@ jsonApi.define({
   attributes: {
     id: jsonApi.Joi.string().default(jsonApi.Joi.ref('_id')),
     _id: jsonApi.Joi.string(),
+    host: jsonApi.Joi.string().trim()
+      .description("The host name.")
+      .example("rpp.hostname.com"),
     tagname: jsonApi.Joi.string().trim()
       .description("The unique tag name.")
       .example("MY_AWESOME_TAGNAME"),

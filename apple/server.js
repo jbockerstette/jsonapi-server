@@ -1,10 +1,10 @@
 "use strict";
-var server = module.exports = { };
+const server = module.exports = {};
 
-var jsonApi = require("../.");
-var fs = require("fs");
-var path = require("path");
-var ldap_auth = require("./ldap_auth");
+const jsonApi = require("../.");
+const fs = require("fs");
+const path = require("path");
+const ldap_auth = require("./ldap_auth");
 
 process.title = "jsonapi-server";
 
@@ -107,7 +107,7 @@ fs.readdirSync(path.join(__dirname, "/resources")).filter(function(filename) {
 }).forEach(require);
 
 jsonApi.onUncaughtException(function(request, error) {
-  var errorDetails = error.stack.split("\n");
+  const errorDetails = error.stack.split("\n");
   console.error(JSON.stringify({
     request: request,
     error: errorDetails.shift(),

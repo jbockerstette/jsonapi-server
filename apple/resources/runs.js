@@ -1,5 +1,5 @@
-var jsonApi = require("../../.");
-var MongoStore = require("../../../jsonapi-store-mongodb");
+const jsonApi = require("../../.");
+const MongoStore = require("../../../jsonapi-store-mongodb");
 //var rppHandler = require("../handlers/rppHandler.js");
 
 jsonApi.define({
@@ -13,6 +13,9 @@ jsonApi.define({
   attributes: {
     id: jsonApi.Joi.string().default(jsonApi.Joi.ref('_id')),
     _id: jsonApi.Joi.string(),
+    host: jsonApi.Joi.string().trim()
+      .description("The host name.")
+      .example("rpp.hostname.com"),
     objectId: jsonApi.Joi.string().required()
       .description("The tag or alarmDef this history is for."),
     device_id: jsonApi.Joi.string().required()

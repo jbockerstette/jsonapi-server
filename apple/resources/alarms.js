@@ -16,10 +16,13 @@ jsonApi.define({
   attributes: {
     id: jsonApi.Joi.string().default(jsonApi.Joi.ref('_id')),
     _id: jsonApi.Joi.string(),
+    host: jsonApi.Joi.string().trim()
+      .description("The host name.")
+      .example("rpp.hostname.com"),
     tagname: jsonApi.Joi.string().required()
       .description("The tag this alarm is for."),
     deviceName: jsonApi.Joi.string().required()
-      .description("The tag this alarm is for."),
+      .description("The device this alarm is for."),
     tagId: jsonApi.Joi.string().required()
       .description("The tag id this alarm is for."),
     device_id: jsonApi.Joi.string().required()
