@@ -17,25 +17,25 @@ jsonApi.define({
     timestamp: jsonApi.Joi.date().required() // also, for javascript timestamp (milliseconds)
       .description("The Unix time in milliseconds of the log.")
       .example("1463672736248"),
-    processName: jsonApi.Joi.string().trim()
+    processName: jsonApi.Joi.allow(null, '').optional()
       .description("The log origination process name.")
       .example("rpp-modbus-driver"),
-    filename: jsonApi.Joi.string().trim()
+    filename: jsonApi.Joi.allow(null, '').optional()
       .description("The log origination file name.")
       .example("dbimporter.js"),
     logLevel: jsonApi.Joi.string().insensitive().trim().regex(REGEX_LOG_LEVEL).default('Info')
       .description("The log level severity which can be Warning, Info, Error, Fatal.")
       .example("Error"),
-    host: jsonApi.Joi.string().trim()
+    host: jsonApi.Joi.allow(null, '').optional()
       .description("The log origination host name.")
       .example("my.host.name.com"),
-    tagname: jsonApi.Joi.string().trim()
+    tagname: jsonApi.Joi.allow(null, '').optional()
       .description("The log origination tag name if there is one.")
       .example("MY_AWESOME_TAGNAME"),
-    deviceName: jsonApi.Joi.string().trim()
+    deviceName: jsonApi.Joi.allow(null, '').optional()
       .description("The log origination device name if there is one.")
       .example("MY_AWESOME_DEVICE"),
-    username: jsonApi.Joi.string().trim()
+    username: jsonApi.Joi.allow(null, '').optional()
       .description("The log origination username if there is one.")
       .example("System"),
     message: jsonApi.Joi.string().trim()

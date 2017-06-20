@@ -1,5 +1,5 @@
-var jsonApi = require("../../.");
-var MongoStore = require("../../../jsonapi-store-mongodb");
+const jsonApi = require("../../.");
+const MongoStore = require("../../../jsonapi-store-mongodb");
 //var rppHandler = require("../handlers/rppHandler.js");
 const REGEX_NAME_STRING = /^[A-Z|a-z0-9_%][^\s*\\?;{}[\]|`'"]*$/gi;
 const REGEX_VALUE_TYPE = /(^bool$)|(^real$)|(^integer$)|(^string$)$/gi;
@@ -87,7 +87,7 @@ jsonApi.define({
     alarmReset: jsonApi.Joi.boolean().default(false)
       .description("If true the alarm has been reset.")
       .example("true"),
-    alarmDefId: jsonApi.Joi.string().optional()
+    alarmDefId: jsonApi.Joi.allow(null, '').optional()
       .description("If in alarm, then this will point to the alarm def id."),
     device_id: jsonApi.Joi.allow(null, '').optional()
       .description("The device id that this tag is associated with.")
