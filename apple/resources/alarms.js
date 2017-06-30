@@ -19,12 +19,12 @@ jsonApi.define({
     host: jsonApi.Joi.string().trim()
       .description("The host name.")
       .example("rpp.hostname.com"),
-    tagname: jsonApi.Joi.string().required()
-      .description("The tag this alarm is for."),
+    objName: jsonApi.Joi.string().required()
+      .description("The object name this alarm is for."),
     deviceName: jsonApi.Joi.string().required()
       .description("The device this alarm is for."),
-    tagId: jsonApi.Joi.string().required()
-      .description("The tag id this alarm is for."),
+    objId: jsonApi.Joi.string().required()
+      .description("The object id this alarm is for."),
     device_id: jsonApi.Joi.string().required()
       .description("The device id this alarm is for."),
     alarmDefId: jsonApi.Joi.string().required()
