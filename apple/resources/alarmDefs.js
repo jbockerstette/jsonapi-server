@@ -15,8 +15,8 @@ jsonApi.define({
   attributes: {
     id: jsonApi.Joi.string().default(jsonApi.Joi.ref('_id')),
     _id: jsonApi.Joi.string(),
-    tagId: jsonApi.Joi.string().required()
-      .description("The tag this alarm def is for."),
+    objId: jsonApi.Joi.string().required()
+      .description("The object this alarm def is for."),
     device_id: jsonApi.Joi.string().required()
       .description("The device this alarm def is for."),
     desc: jsonApi.Joi.string().trim()

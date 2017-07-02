@@ -18,14 +18,14 @@ jsonApi.define({
     host: jsonApi.Joi.string().trim()
       .description("The host name.")
       .example("rpp.hostname.com"),
-    tagname: jsonApi.Joi.string().trim()
-      .description("The unique tag name.")
+    objName: jsonApi.Joi.string().trim()
+      .description("The unique object name.")
       .example("MY_AWESOME_TAGNAME"),
     deviceName: jsonApi.Joi.string().trim()
       .description("The unique device name.")
       .example("MY_AWESOME_DEVICE"),
-    tagId: jsonApi.Joi.string().required()
-      .description("The tag this history is for."),
+    objId: jsonApi.Joi.string().required()
+      .description("The object id this history is for."),
     device_id: jsonApi.Joi.string().required()
       .description("The device this history is for."),
     desc: jsonApi.Joi.string().trim()

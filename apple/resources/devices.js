@@ -16,7 +16,7 @@ jsonApi.define({
   attributes: {
     id: jsonApi.Joi.string().default(jsonApi.Joi.ref('_id')),
     _id: jsonApi.Joi.string(),
-    status: jsonApi.Joi.string().optional()
+    dataQuality: jsonApi.Joi.string().optional()
       .description("Is the plc up or down or some other status.")
       .example("OK"),
     hostnameOrIP: jsonApi.Joi.string().trim().hostname().required()
@@ -45,7 +45,21 @@ jsonApi.define({
       .example("1"),
     scanEnabled: jsonApi.Joi.boolean().default(true)
       .description("Should the driver try to connect and scan the plc.")
-      .example("FALSE")
+      .example("FALSE"),
+    alarmStatus: jsonApi.Joi.string().optional()
+      .description("Is the activeAlarm clear, acked, unacked.")
+      .example("Clear, acked, unacked"),
+    activeAlarm: jsonApi.Joi.string().optional()
+      .description("Is the device in an alarm state based on an alarmDefs definition for the device.")
+      .example("None, HH, HI, LO, LL, INVALID"),
+    alarmAcked: jsonApi.Joi.boolean().default(false)
+      .description("If true the alarm has been acked.")
+      .example("true"),
+    alarmReset: jsonApi.Joi.boolean().default(false)
+      .description("If true the alarm has been reset.")
+      .example("true"),
+    alarmDefId: jsonApi.Joi.allow(null, '').optional()
+      .description("If in alarm, then this will point to the alarm def id."),
   },
   examples: [{}]
 });

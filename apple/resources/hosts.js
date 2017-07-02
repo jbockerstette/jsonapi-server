@@ -25,7 +25,25 @@ jsonApi.define({
       .example("00:00:00:00:00:00"),
     desc: jsonApi.Joi.string().required()
       .description("The description <Country>.<Location>.<Building>.<Floor>.<Room>.<Row>.<DP>.<PrimaryOrSec>")
-      .example("US.MSC.01.01.0001.01.02.1")
+      .example("US.MSC.01.01.0001.01.02.1"),
+    dataQuality: jsonApi.Joi.string().optional()
+      .description("The data quality of this host.")
+      .example("Ok"),
+    alarmStatus: jsonApi.Joi.string().optional()
+      .description("Is the activeAlarm clear, acked, unacked.")
+      .example("Clear, acked, unacked"),
+    activeAlarm: jsonApi.Joi.string().optional()
+      .description("Is the tag in an alarm state based on an alarmDefs definition for the tag.")
+      .example("None, HH, HI, LO, LL, INVALID"),
+    alarmAcked: jsonApi.Joi.boolean().default(false)
+      .description("If true the alarm has been acked.")
+      .example("true"),
+    alarmReset: jsonApi.Joi.boolean().default(false)
+      .description("If true the alarm has been reset.")
+      .example("true"),
+    alarmDefId: jsonApi.Joi.allow(null, '').optional()
+      .description("If in alarm, then this will point to the alarm def id."),
+
   },
   examples: [{}]
 });
