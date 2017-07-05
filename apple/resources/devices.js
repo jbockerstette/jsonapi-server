@@ -22,7 +22,7 @@ jsonApi.define({
     hostnameOrIP: jsonApi.Joi.string().trim().hostname().required()
       .description("The hostname or ip of this device.")
       .example("my.cool.plc"),
-    name: jsonApi.Joi.string().trim().regex(REGEX_NAME_STRING)
+    objName: jsonApi.Joi.string().trim().regex(REGEX_NAME_STRING)
       .description("Whatever you want to call this device.")
       .example("MY_COOL_AB_PLC"),
     macAddress: jsonApi.Joi.string().trim().uppercase().regex(REGEX_MAC_ADDRESS).optional()

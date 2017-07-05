@@ -2,6 +2,7 @@ var jsonApi = require('../../.');
 var MongoStore = require('../../../jsonapi-store-mongodb');
 //var rppHandler = require("../handlers/rppHandler.js");
 const REGEX_MAC_ADDRESS = /^(([A-Fa-f0-9]{2}[:]){5}[A-Fa-f0-9]{2}[,]?)+$/i;
+const REGEX_NAME_STRING = /^[A-Z|a-z0-9_%][^\s*\\?;{}[\]|`'"]*$/gi;
 
 jsonApi.define({
   namespace: "json:api",
@@ -14,6 +15,9 @@ jsonApi.define({
   attributes: {
     id: jsonApi.Joi.string().default(jsonApi.Joi.ref('_id')),
     _id: jsonApi.Joi.string(),
+    objName: jsonApi.Joi.string().trim().regex(REGEX_NAME_STRING)
+      .description("The unique host name.")
+      .example("MyHost"),
     hostnameOrIP: jsonApi.Joi.string().trim().hostname().required()
       .description("The hostname or ip of the host which is running this scada software.")
       .example("my.cool.host.com"),

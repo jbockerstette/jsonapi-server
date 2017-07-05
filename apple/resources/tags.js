@@ -16,7 +16,7 @@ jsonApi.define({
   attributes: {
     id: jsonApi.Joi.string().default(jsonApi.Joi.ref('_id')),
     _id: jsonApi.Joi.string(),
-    tagname: jsonApi.Joi.string().trim().regex(REGEX_NAME_STRING)
+    objName: jsonApi.Joi.string().trim().regex(REGEX_NAME_STRING)
       .description("The unique tag name.")
       .example("MY_AWESOME_TAGNAME"),
     input: jsonApi.Joi.any().optional()
