@@ -2,7 +2,7 @@ var jsonApi = require("../../.");
 var MongoStore = require("../../../jsonapi-store-mongodb");
 //var rppHandler = require("../handlers/rppHandler.js");
 const REGEX_LEVEL = /(^Critical$)|(^Info$)|(^Warning$)$/gi;
-const REGEX_ALARM_TYPE = /(^HH$)|(^HI$)|(^LO$)|(^LL$)|(^INVALID$)$/gi;
+const REGEX_ALARM_TYPE = /(^EQUAL$)|(^NOT_EQUAL$)|(^HH$)|(^HI$)|(^LO$)|(^LL$)|(^INVALID$)$/gi;
 
 jsonApi.define({
   namespace: "json:api",
@@ -37,7 +37,7 @@ jsonApi.define({
     alarmType: jsonApi.Joi.string().trim().uppercase().regex(REGEX_ALARM_TYPE).required()
       .description("The type of the alarm.")
       .example("HH"),
-    setpoint: jsonApi.Joi.number().default(0)
+    setpoint: jsonApi.Joi.any().default(0)
       .description("The value that triggers the alarm.")
       .example("10"),
     timestamp: jsonApi.Joi.date().required() // also, for javascript timestamp (milliseconds)

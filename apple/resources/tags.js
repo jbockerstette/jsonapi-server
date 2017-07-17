@@ -80,7 +80,7 @@ jsonApi.define({
       .example("Clear, acked, unacked"),
     activeAlarm: jsonApi.Joi.string().optional()
       .description("Is the tag in an alarm state based on an alarmDefs definition for the tag.")
-      .example("None, HH, HI, LO, LL, INVALID"),
+      .example("None, HH, HI, LO, LL, INVALID, EQUAL, NOT_EQUAL"),
     alarmAcked: jsonApi.Joi.boolean().default(false)
       .description("If true the alarm has been acked.")
       .example("true"),
