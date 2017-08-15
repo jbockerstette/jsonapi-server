@@ -11,12 +11,12 @@ process.title = "jsonapi-server";
 jsonApi.setConfig({
   graphiql: false,
   swagger: {
-    title: "Apple DP JSON:API Server",
+    title: "RPP DP JSON:API Server",
     version: "0.1.1",
-    description: "Apple Rest API for RPP and DP management.",
+    description: "Rest API for RPP and DP management.",
     contact: {
       name: "API Contact",
-      email: "akirka@gmail.com",
+      email: "jim.bockerstette@gmail.com",
       url: "megawin-corp.com"
     },
     license: {
