@@ -42,7 +42,28 @@ jsonApi.define({
       .example("v1.0.1"),
     pin: jsonApi.Joi.number().integer().required().default(1234)
       .description("The pin to login to the RPP. This will work even if no ldap server is available.")
-      .example("1234")
+      .example("1234"),
+    licenseKey: jsonApi.Joi.string().required().default("charger.")
+      .description("The key a user must enter in order to sign up.")
+      .example("MySecretKey"),
+    gmailUser: jsonApi.Joi.string().email().optional()
+      .description("A Gmail account used to send text messages.")
+      .example("my.gmail.account@gmail.com"),
+    gmailPassword: jsonApi.Joi.string().trim().optional()
+      .description("A Gmail account password used to send text messages.")
+      .example("my.secret.gmail.pw"),
+    webAppUrl: jsonApi.Joi.string().uri().optional()
+      .description("The url to the web app which is part of the text message.")
+      .example("https://www.rpp01.com/alarms"),
+    textAlarmSummaryFreq: jsonApi.Joi.number().integer().required().default(86400000)
+      .description("How often should you send a text with an alarm summary (millisecs).")
+      .example("86400000"),
+    textAlarmSummaryEnabled: jsonApi.Joi.boolean().default(false)
+      .description("If enabled then alarm summary will be sent based on the alarm summary frequency.")
+      .example("TRUE"),
+    ldapEnabled: jsonApi.Joi.boolean().default(false)
+      .description("Should you use ldap to verify user log-ins and sign-ups.")
+      .example("FALSE"),
   },
   examples: [
     {

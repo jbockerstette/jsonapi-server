@@ -22,6 +22,9 @@ jsonApi.define({
     hostnameOrIP: jsonApi.Joi.string().trim().hostname().required()
       .description("The hostname or ip of this device.")
       .example("my.cool.plc"),
+    altHostnameOrIP: jsonApi.Joi.string().trim().hostname().allow(null, '').optional()
+      .description("The alternate hostname or ip of this device optional.")
+      .example("my.cool.plc"),
     objName: jsonApi.Joi.string().trim().regex(REGEX_NAME_STRING)
       .description("Whatever you want to call this device.")
       .example("MY_COOL_AB_PLC"),

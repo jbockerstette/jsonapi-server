@@ -25,6 +25,9 @@ jsonApi.define({
     memLocation: jsonApi.Joi.string().required()
       .description("PLC memory location.")
       .example("N21:0 or 40001 for modbus driver"),
+    altTagname: jsonApi.Joi.string().allow(null, '').optional()
+      .description("Alternate tag name to be used with the device alternate host.")
+      .example("MyCoolTag"),
     value: jsonApi.Joi.any().optional()
       .description("The current value of the tag in engineering units.")
       .example("24.5"),
